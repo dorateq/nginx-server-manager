@@ -59,12 +59,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     supervisor \
     cron \
     logrotate \
+    sudo \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-# Create application user
+# Create application user with a real home for certbot files
 RUN groupadd -r nginx-manager && \
-    useradd -r -g nginx-manager -d /app -s /bin/bash nginx-manager && \
+    useradd -r -g nginx-manager -d /home/nginx-manager -s /bin/bash -m nginx-manager && \
     usermod -a -G www-data nginx-manager
 
 # Set working directory

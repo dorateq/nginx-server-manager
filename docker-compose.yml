@@ -65,7 +65,7 @@ services:
     
     # Health check
     healthcheck:
-      test: ["/healthcheck.sh"]
+      test: ["CMD","/healthcheck.sh"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -82,13 +82,13 @@ services:
           cpus: '0.5'
     
     # Security settings
-    security_opt:
-      - no-new-privileges:true
+    # Allow sudo within the container for nginx reloads/tests
     read_only: false  # Needs write access for nginx configs and SSL
     
     # Capabilities (minimal required)
     cap_add:
       - CHOWN
+      - FOWNER
       - DAC_OVERRIDE
       - SETGID
       - SETUID

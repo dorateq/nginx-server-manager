@@ -59,6 +59,8 @@ log "Setting up permissions..."
 chown -R nginx-manager:www-data /app/data /var/www /var/log/nginx-manager
 chown -R nginx-manager:www-data /home/nginx-manager/.letsencrypt
 chown -R www-data:www-data /var/log/nginx
+chown -R nginx-manager:www-data /etc/nginx/sites-available /etc/nginx/sites-enabled
+chmod 775 /etc/nginx/sites-available /etc/nginx/sites-enabled
 chmod 755 /home/nginx-manager/.letsencrypt
 find /home/nginx-manager/.letsencrypt -type d -exec chmod 755 {} \;
 
